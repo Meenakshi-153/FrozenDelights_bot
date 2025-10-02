@@ -1,4 +1,4 @@
-from dotenv import load_dotenv
+
 import streamlit as st
 from openai import OpenAI
 import time
@@ -7,7 +7,8 @@ import os
 # Load environment variables
 load_dotenv() 
 # client = OpenAI()
-client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
+# client = OpenAI(api_key=os.getenv("OPENAI_API_KEY")
+client = OpenAI(api_key=st.secrets["OPENAI_API_KEY"])
 
 # --- SESSION STATE FLAGS ---
 if "first_order" not in st.session_state:
@@ -107,3 +108,4 @@ if user_input := st.chat_input("What would you like to order?"):
     bot_reply = response.choices[0].message.content
     st.session_state.messages.append({"role": "assistant", "content": bot_reply})
     st.chat_message("assistant").write(bot_reply)
+
